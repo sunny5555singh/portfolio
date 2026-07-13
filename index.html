@@ -25,19 +25,23 @@
     <link rel="stylesheet" href="assets/css/steller.css" />
   </head>
   <style>
+    :root {
+      scroll-behavior: smooth;
+    }
+
     .img-wrapper {
       position: relative;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 16px;
       margin-bottom: 30px;
       background: #000;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
 
     .img-wrapper:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
     }
 
     .img-wrapper img {
@@ -45,10 +49,13 @@
       height: 250px;
       object-fit: contain;
       padding: 20px;
-      transition: all 0.3s ease;
+      transition: transform 0.4s ease, filter 0.4s ease;
     }
 
-    /* Special styling for Ultimatum logo */
+    .img-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
     .portfolio-item:first-child .img-wrapper {
       background: #000;
     }
@@ -58,7 +65,6 @@
       filter: brightness(1.2);
     }
 
-    /* White background for other logos */
     .portfolio-item:not(:first-child) .img-wrapper {
       background: #fff;
     }
@@ -69,12 +75,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.78);
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease;
       padding: 20px;
     }
 
@@ -92,24 +98,25 @@
       color: #fff;
       font-size: 1.2rem;
       margin-bottom: 10px;
+      letter-spacing: 0.02em;
     }
 
     .overlay-infos p {
       color: #ddd;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 15px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
     .overlay-infos a {
       color: #fff;
       font-size: 1.2rem;
       margin: 0 10px;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
 
     .overlay-infos a:hover {
-      color: #007bff;
+      color: #36b9ff;
     }
 
     .img-thumbnail {
@@ -133,22 +140,101 @@
       background-color: #800000;
     }
 
-    @media (max-width: 768px) {
-      .portfolio-item {
-        flex: 0 0 50%;
+    .card {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
+    }
+
+    .social-item {
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .social-item:hover {
+      transform: translateY(-3px);
+      color: #36b9ff;
+    }
+
+    .hero-title,
+    .hero-subtitle,
+    .hero-buttons,
+    .hero-socials,
+    .widget-item,
+    .section,
+    .portfolio-item,
+    .custom-card,
+    .contact .card,
+    .page-footer,
+    .img-holder,
+    .infos {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .js .hero-title,
+    .js .hero-subtitle,
+    .js .hero-buttons,
+    .js .hero-socials,
+    .js .widget-item,
+    .js .section,
+    .js .portfolio-item,
+    .js .custom-card,
+    .js .contact .card,
+    .js .page-footer,
+    .js .img-holder,
+    .js .infos {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+
+    .animate-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .hero-scale {
+      animation: hero-scale 1.2s ease forwards;
+    }
+
+    @keyframes hero-scale {
+      from {
+        transform: scale(0.97);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
       }
     }
 
-    @media (max-width: 576px) {
-      .portfolio-item {
-        flex: 0 0 100%;
-      }
+    .widget-item {
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .js .widget-item.animate-visible {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .navbar {
       min-height: 80px;
       padding: 10px 0;
       background: #fff !important;
+      transition: background-color 0.35s ease, box-shadow 0.35s ease;
     }
 
     .navbar-brand {
@@ -168,6 +254,7 @@
       box-shadow: none;
       object-fit: contain;
       filter: none !important;
+      transition: width 0.3s ease;
     }
 
     .navbar.affix {
@@ -178,7 +265,18 @@
 
     .navbar.affix .navbar-brand img {
       width: 90px !important;
-      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-item {
+        flex: 0 0 50%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .portfolio-item {
+        flex: 0 0 100%;
+      }
     }
   </style>
 
@@ -1165,6 +1263,35 @@
 
     <!-- steller js -->
     <script src="assets/js/steller.js"></script>
+    <script>
+      document.documentElement.classList.add('js');
+      window.addEventListener('DOMContentLoaded', function () {
+        var heroItems = document.querySelectorAll('.infos, .img-holder, .buttons, .socials, .widget-item');
+        heroItems.forEach(function (item, index) {
+          item.style.transitionDelay = (index + 1) * 120 + 'ms';
+          item.classList.add('animate-visible');
+        });
+
+        var revealItems = document.querySelectorAll(
+          '.section, .portfolio-item, .custom-card, .contact .card, .page-footer'
+        );
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.18 }
+        );
+
+        revealItems.forEach(function (item) {
+          observer.observe(item);
+        });
+      });
+    </script>
 
     <!-- linkedin -->
     <script
